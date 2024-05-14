@@ -19,6 +19,16 @@ import { ListByCategoryController } from "./controllers/product/ListByCategoryCo
 // Middlewares
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
+// controllers order
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
+import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
+import { AddItemController } from "./controllers/order/AddItemController";
+import { RemoveItemController } from "./controllers/order/RemoveItemController";
+import { SendOrderController } from "./controllers/order/SendOrderController";
+import { ListOrdersController } from "./controllers/order/ListOrdersController";
+import { DetailOrderController } from "./controllers/order/DetailOrderController";
+import { FinishOrderController } from "./controllers/order/FinishOrderController";
+
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
 
@@ -36,5 +46,18 @@ router.get('/categories', isAuthenticated, new ListCategoryController().handle);
 // Rota com middleware para envio de arquivo (upload.single())
 router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle);
 router.get('/category/product', isAuthenticated, new ListByCategoryController().handle);
+
+/* ---------- Rotas Order ---------- */ 
+router.post('/order', isAuthenticated, new CreateOrderController().handle);
+router.delete('/order', isAuthenticated, new RemoveOrderController().handle);
+
+router.post('/order/add', isAuthenticated, new AddItemController().handle);
+router.delete('/order/remove', isAuthenticated, new RemoveItemController().handle);
+
+router.put('/order/send', isAuthenticated, new SendOrderController().handle);
+router.put('/order/finish', isAuthenticated, new FinishOrderController().handle);
+
+router.get('/orders', isAuthenticated, new ListOrdersController().handle);
+router.get('/order/detail', isAuthenticated, new DetailOrderController().handle);
 
 export { router };
