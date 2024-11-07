@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+    --dark-700 -> slate-900
+    --dark-900 -> slate-950
+    --gray-100 -> gray-500
+    --green-900 -> emerald-400
+    --red-900 -> red-500
+*/
+
+body {
+    @apply bg-slate-900 text-white flex flex-col items-center justify-center;
+}
+
