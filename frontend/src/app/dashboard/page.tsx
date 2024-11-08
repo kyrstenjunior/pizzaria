@@ -7,7 +7,7 @@ import { api } from "@/services/api";
 
 async function getOrders(): Promise<OrderProps[] | []> {
     try {
-        const token = getCookieServer();
+        const token = await getCookieServer();
 
         const response = await api.get("/orders", {
             headers: {
